@@ -10,7 +10,17 @@ const orderRoute = require('./api/routes/orders');
 const userRoute = require('./api/routes/users');
 
 //mongodb atlas connection
-mongoose.connect('mongodb+srv://dbBibek:bibek9813@cluster0-pjd59.mongodb.net/test?retryWrites=true');
+//mongoose.connect('mongodb+srv://dbBibek:bibek9813@cluster0-pjd59.mongodb.net/test?retryWrites=true',{useNewUrlParser: true });
+
+
+
+//create connection
+mongoose.connect('mongodb://localhost:27017/ResfullAPI',{useNewUrlParser: true });
+
+//on connection
+mongoose.connection.on("connected", ()=>{
+    console.log("connected ");
+});
 
 //logging the request
 app.use(morgan('dev'));
@@ -20,7 +30,7 @@ app.use(bodyParser.json());
 //Routes which handles the request
 app.use('/products', productRoute);
 app.use('/orders', orderRoute);
-app.use('/user', userRoute);
+app.use('/users', userRoute);
 
 //handling the errors
 app.use(function (req, res, next) {

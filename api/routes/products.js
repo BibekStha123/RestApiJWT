@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Product = require('../models/product');
 const multer = require('multer');
+const checkAuth = require('../middleware/check_auth');
 
 const storage = multer.diskStorage({
     destination: function(req, file, callback){
@@ -47,12 +48,12 @@ router.get('/', function(req, res){
     });
 });
 
-router.post('/', upload.single('productImage'),function(req, res){
+router.post('/', checkAuth, /* upload.single('productImage') , */function(req, res){
     console.log(req.file);
     const product = new Product({
         name: req.body.bookname,
         price: req.body.price,
-        productImage: req.file.path 
+        //productImage: req.file.path 
     });
     product.save(function(err, data){
        if(err){

@@ -79,7 +79,7 @@ router.patch('/:orderId', function(req, res){
 
 router.delete('/:orderId', function(req, res){
     Order.remove({_id : req.params.orderId})
-         .then(result=>{
+        .then(result=>{
              res.json({
                  message: "deleted successfully",
                  request:{
@@ -88,11 +88,11 @@ router.delete('/:orderId', function(req, res){
                 }
              });
          })
-         .catch(err=>{
-             res.json({
-                 error: err
-             });
-         });
+        .catch(err=>{
+            res.json({
+                error: err
+        });
+    });
 });
 
 
